@@ -1,3 +1,3 @@
-web: bin/dumbflix
+web: bin/dbgolang1
 
 
