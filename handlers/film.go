@@ -17,7 +17,6 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/golang-jwt/jwt/v4"
 
 	"github.com/gorilla/mux"
 )
@@ -27,7 +26,7 @@ type handlerFilm struct {
 }
 
 // Create `path_file` Global variable here ...
-var PathFile = os.Getenv("PATH_FILE")
+// var PathFile = os.Getenv("PATH_FILE")
 
 func HandlerFilm(FilmRepository repositories.FilmRepository) *handlerFilm {
 	return &handlerFilm{FilmRepository}
@@ -43,9 +42,9 @@ func (h *handlerFilm) FindFilms(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(response)
 		return
 	}
-	for i, p := range films {
-		films[i].ThumbnailFilm = os.Getenv("PATH_FILE") + p.ThumbnailFilm
-	}
+	// for i, p := range films {
+	// 	films[i].ThumbnailFilm = os.Getenv("PATH_FILE") + p.ThumbnailFilm
+	// }
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: films}
 	json.NewEncoder(w).Encode(response)
@@ -76,10 +75,10 @@ func (h *handlerFilm) CreateFilm(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	// get data user token
 
-	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
-	userId := int(userInfo["id"].(float64))
+	// userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
+	// userId := int(userInfo["id"].(float64))
 
-	fmt.Println(userId)
+	// fmt.Println(userId)
 
 	// dataContex := r.Context().Value("dataFile") // add this code
 	// filename := dataContex.(string)             // add this code
